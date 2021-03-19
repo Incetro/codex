@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
   spec.license       = 'MIT'
   spec.authors       = { 'incetro' => 'incetro@ya.ru' }
   spec.homepage      = "https://github.com/Incetro/codex.git"
-  spec.summary       = 'Open Source'
+  spec.summary       = 'Elegant Codable wrapper which makes your work a little bit sweety'
 
   spec.ios.deployment_target     = "12.0"
   spec.osx.deployment_target     = "10.15"
