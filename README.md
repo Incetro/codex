@@ -1,10 +1,10 @@
 ![](codex.png)
 
 <div align = "center">
-  <a href="https://cocoapods.org/pods/codex">
+  <a href="https://cocoapods.org/pods/Codex">
     <img src="https://img.shields.io/cocoapods/v/codex.svg?style=flat" />
   </a>
-  <a href="https://github.com/Incetro/codex">
+  <a href="https://github.com/Incetro/Codex">
     <img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" />
   </a>
   <a href="https://github.com/Incetro/codex#installation">
@@ -13,13 +13,13 @@
 </div>
 
 <div align = "center">
-  <a href="https://travis-ci.org/Incetro/codex">
+  <a href="https://travis-ci.org/Incetro/Codex">
     <img src="https://travis-ci.org/Incetro/codex.svg?branch=master" />
   </a>
-  <a href="https://cocoapods.org/pods/codex" target="blank">
+  <a href="https://cocoapods.org/pods/Codex" target="blank">
     <img src="https://img.shields.io/cocoapods/p/codex.svg?style=flat" />
   </a>
-  <a href="https://cocoapods.org/pods/codex" target="blank">
+  <a href="https://cocoapods.org/pods/Codex" target="blank">
     <img src="https://img.shields.io/cocoapods/l/codex.svg?style=flat" />
   </a>
   <br>
