@@ -40,6 +40,20 @@ public extension Encoder {
         let string = formatter.string(from: date)
         try encode(string, for: key)
     }
+
+    /// Encode a date for a given key (specified as a string), using a specific formatter.
+    /// To encode a date without using a specific formatter, simply encode it like any other value.
+    func encode<T: Transformer>(_ value: T.Object, for key: String, transformedBy transformer: T) throws {
+        try encode(value, for: AnyCodingKey(key), transformedBy: transformer)
+    }
+
+    /// Encode a date for a given key (specified using a `CodingKey`), using a specific formatter.
+    /// To encode a date without using a specific formatter, simply encode it like any other value.
+    func encode<K: CodingKey, T: Transformer>(_ value: T.Object, for key: K, transformedBy transformer: T) throws {
+        if let string = transformer.transform(object: value) {
+            try encode(string, for: key)
+        }
+    }
 }
 
 // MARK: - Data
@@ -85,6 +99,23 @@ public extension Decoder {
     func decodeIfPresent<T: Decodable, K: CodingKey>(_ key: K, as type: T.Type = T.self) throws -> T? {
         let container = try self.container(keyedBy: K.self)
         return try container.decodeIfPresent(type, forKey: key)
+    }
+
+    func decode<T: Transformer>(_ key: String, transformedBy transformer: T) throws -> T.Object {
+        try decode(AnyCodingKey(key), transformedBy: transformer)
+    }
+
+    func decode<K: CodingKey, T: Transformer>(_ key: K, transformedBy transformer: T) throws -> T.Object {
+        let container = try self.container(keyedBy: K.self)
+        let rawString = try container.decode(T.JSON.self, forKey: key)
+        guard let date = transformer.transform(json: rawString) else {
+            throw DecodingError.dataCorruptedError(
+                forKey: key,
+                in: container,
+                debugDescription: "Unable to transform date string"
+            )
+        }
+        return date
     }
 
     /// Decode a date from a string for a given key (specified as a string), using a

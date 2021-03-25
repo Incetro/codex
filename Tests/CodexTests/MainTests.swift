@@ -491,4 +491,90 @@ final class MainTest: XCTestCase {
         let dataNull = "{\"string\": null}".data(using: .utf8)!
         XCTAssertNoThrow(try dataNull.decoded() as Book)
     }
+
+    func testDateWithCustomTransformer() throws {
+
+        struct Book: Codable, Equatable {
+
+            /// given
+
+            let releaseDate: Date
+
+            init(releaseDate: Date) {
+                self.releaseDate = releaseDate
+            }
+
+            init(from decoder: Decoder) throws {
+                releaseDate = try decoder.decode("releaseDate", transformedBy: UnixTransformer())
+            }
+
+            func encode(to encoder: Encoder) throws {
+                try encoder.encode(releaseDate, for: "releaseDate", transformedBy: UnixTransformer())
+            }
+        }
+
+        /// when
+
+        let book        = Book(releaseDate: Date())
+        let data        = try book.encoded()
+        let decoded     = try data.decoded() as Book
+        let transformer = UnixTransformer()
+
+        /// then
+
+        XCTAssertEqual(
+            transformer.transform(object: book.releaseDate),
+            transformer.transform(object: decoded.releaseDate)
+        )
+    }
+}
+
+struct User: Codable {
+
+    enum CodingKeys: CodingKey {
+        case name
+        case surname
+        case patronymic
+        case social
+        case birthdate
+        case registrationDate
+    }
+
+    struct DateCodingError: Error {}
+
+    static let dateFormatter = DateFormatter()
+
+    let name: String
+    let surname: String
+    let patronymic: String?
+    let social: [String]
+    let birthdate: Date
+    let registrationDate: Date
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        surname = try container.decode(String.self, forKey: .surname)
+        patronymic = try container.decodeIfPresent(String.self, forKey: .patronymic)
+        social = (try? container.decode([String].self, forKey: .social)) ?? []
+        let dateString = try container.decode(String.self, forKey: .birthdate)
+        guard let birthdate = User.dateFormatter.date(from: dateString) else {
+            throw DateCodingError()
+        }
+        self.birthdate = birthdate
+        let registrationDateDouble = try container.decode(Double.self, forKey: .registrationDate)
+        registrationDate = Date(timeIntervalSince1970: registrationDateDouble)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(surname, forKey: .surname)
+        try container.encode(patronymic, forKey: .patronymic)
+        try container.encode(social, forKey: .social)
+        let dateString = User.dateFormatter.string(from: birthdate)
+        try container.encode(dateString, forKey: .birthdate)
+        try container.encode(registrationDate.timeIntervalSince1970, forKey: .registrationDate)
+
+    }
 }

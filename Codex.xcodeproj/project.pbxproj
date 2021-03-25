@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3386C30F260D05F500E1D190 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C30E260D05F500E1D190 /* Transformer.swift */; };
+		3386C310260D05F500E1D190 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C30E260D05F500E1D190 /* Transformer.swift */; };
+		3386C311260D05F500E1D190 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C30E260D05F500E1D190 /* Transformer.swift */; };
+		3386C312260D05F500E1D190 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C30E260D05F500E1D190 /* Transformer.swift */; };
+		3386C329260D075B00E1D190 /* UnixTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C328260D075B00E1D190 /* UnixTransformer.swift */; };
+		3386C32A260D075B00E1D190 /* UnixTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C328260D075B00E1D190 /* UnixTransformer.swift */; };
+		3386C32B260D075B00E1D190 /* UnixTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C328260D075B00E1D190 /* UnixTransformer.swift */; };
+		3386C32C260D075B00E1D190 /* UnixTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3386C328260D075B00E1D190 /* UnixTransformer.swift */; };
 		33FEB94D25755A78001B4255 /* Codex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEB94C25755A78001B4255 /* Codex.swift */; };
 		33FEB94E25755A78001B4255 /* Codex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEB94C25755A78001B4255 /* Codex.swift */; };
 		33FEB94F25755A78001B4255 /* Codex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEB94C25755A78001B4255 /* Codex.swift */; };
@@ -64,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3386C30E260D05F500E1D190 /* Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
+		3386C328260D075B00E1D190 /* UnixTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnixTransformer.swift; sourceTree = "<group>"; };
 		33FEB94C25755A78001B4255 /* Codex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codex.swift; sourceTree = "<group>"; };
 		33FEB95825755AF1001B4255 /* AnyEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEncoder.swift; sourceTree = "<group>"; };
 		33FEB96425755BEE001B4255 /* AnyDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecoder.swift; sourceTree = "<group>"; };
@@ -139,6 +149,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3386C30D260D05AD00E1D190 /* Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				3386C30E260D05F500E1D190 /* Transformer.swift */,
+				3386C328260D075B00E1D190 /* UnixTransformer.swift */,
+			);
+			path = Transformers;
+			sourceTree = "<group>";
+		};
 		CB1123F6256BF82700215E47 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +210,7 @@
 		CB30D719256ADE2E00EE2C61 /* Codex */ = {
 			isa = PBXGroup;
 			children = (
+				3386C30D260D05AD00E1D190 /* Transformers */,
 				CB30D71A256ADE2E00EE2C61 /* Supporting Files */,
 				33FEB94C25755A78001B4255 /* Codex.swift */,
 				33FEB95825755AF1001B4255 /* AnyEncoder.swift */,
@@ -519,6 +539,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				33FEB94D25755A78001B4255 /* Codex.swift in Sources */,
+				3386C30F260D05F500E1D190 /* Transformer.swift in Sources */,
+				3386C329260D075B00E1D190 /* UnixTransformer.swift in Sources */,
 				33FEB95925755AF1001B4255 /* AnyEncoder.swift in Sources */,
 				33FEB96525755BEE001B4255 /* AnyDecoder.swift in Sources */,
 				33FEB97125755CDA001B4255 /* AnyDateFormatter.swift in Sources */,
@@ -531,6 +553,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				33FEB94E25755A78001B4255 /* Codex.swift in Sources */,
+				3386C310260D05F500E1D190 /* Transformer.swift in Sources */,
+				3386C32A260D075B00E1D190 /* UnixTransformer.swift in Sources */,
 				33FEB95A25755AF1001B4255 /* AnyEncoder.swift in Sources */,
 				33FEB96625755BEE001B4255 /* AnyDecoder.swift in Sources */,
 				33FEB97225755CDA001B4255 /* AnyDateFormatter.swift in Sources */,
@@ -543,6 +567,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				33FEB94F25755A78001B4255 /* Codex.swift in Sources */,
+				3386C311260D05F500E1D190 /* Transformer.swift in Sources */,
+				3386C32B260D075B00E1D190 /* UnixTransformer.swift in Sources */,
 				33FEB95B25755AF1001B4255 /* AnyEncoder.swift in Sources */,
 				33FEB96725755BEE001B4255 /* AnyDecoder.swift in Sources */,
 				33FEB97325755CDA001B4255 /* AnyDateFormatter.swift in Sources */,
@@ -555,6 +581,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				33FEB95025755A78001B4255 /* Codex.swift in Sources */,
+				3386C312260D05F500E1D190 /* Transformer.swift in Sources */,
+				3386C32C260D075B00E1D190 /* UnixTransformer.swift in Sources */,
 				33FEB95C25755AF1001B4255 /* AnyEncoder.swift in Sources */,
 				33FEB96825755BEE001B4255 /* AnyDecoder.swift in Sources */,
 				33FEB97425755CDA001B4255 /* AnyDateFormatter.swift in Sources */,

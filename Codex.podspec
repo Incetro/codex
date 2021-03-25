@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name          = 'Codex'
-  spec.version       = '0.1.2'
+  spec.version       = '0.2.2'
   spec.license       = 'MIT'
   spec.authors       = { 'incetro' => 'incetro@ya.ru' }
   spec.homepage      = "https://github.com/Incetro/codex.git"

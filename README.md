@@ -127,9 +127,10 @@ struct User: Codable {
         case surname
         case patronymic
         case social
-        case date
+        case birthdate
+        case registrationDate
     }
-    
+
     struct DateCodingError: Error {}
 
     static let dateFormatter = yourDateFormatter()
@@ -139,6 +140,7 @@ struct User: Codable {
     let patronymic: String?
     let social: [String]
     let birthdate: Date
+    let registrationDate: Date
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -146,21 +148,25 @@ struct User: Codable {
         surname = try container.decode(String.self, forKey: .surname)
         patronymic = try container.decodeIfPresent(String.self, forKey: .patronymic)
         social = (try? container.decode([String].self, forKey: .social)) ?? []
-        let dateString = try container.decode(String.self, forKey: .date)
-        guard let date = User.dateFormatter.date(from: dateString) else {
+        let dateString = try container.decode(String.self, forKey: .birthdate)
+        guard let birthdate = User.dateFormatter.date(from: dateString) else {
             throw DateCodingError()
         }
-        self.date = date
+        self.birthdate = birthdate
+        let registrationDateDouble = try container.decode(Double.self, forKey: .registrationDate)
+        registrationDate = Date(timeIntervalSince1970: registrationDateDouble)
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(surname, forKey: .surname)
         try container.encode(patronymic, forKey: .patronymic)
         try container.encode(social, forKey: .social)
-        let dateString = User.dateFormatter.string(from: date)
-        try container.encode(dateString, forKey: .date)
+        let dateString = User.dateFormatter.string(from: birthdate)
+        try container.encode(dateString, forKey: .birthdate)
+        try container.encode(registrationDate.timeIntervalSince1970, forKey: .registrationDate)
+
     }
 }
 ```
@@ -169,28 +175,32 @@ struct User: Codable {
 
 ```swift
 struct User: Codable {
-    
+
     let name: String
     let surname: String
     let patronymic: String?
     let social: [String]
+    let birthdate: Date
+    let registrationDate: Date
 
     static let dateFormatter = yourDateFormatter()
-    
+
     init(from decoder: Decoder) throws {
         name = try decoder.decode("name")
         surname = try decoder.decode("surname")
         patronymic = try decoder.decodeIfPresent("patronymic")
         social = (try? decoder.decode("social")) ?? []
-        date = try decoder.decode("date", using: User.dateFormatter)
+        birthdate = try decoder.decode("date", using: User.dateFormatter)
+        registrationDate = try decoder.decode("registrationDate", transformedBy: UnixTransformer())
     }
-    
+
     func encode(to encoder: Encoder) throws {
         try encoder.encode(name, for: "name")
         try encoder.encode(surname, for: "surname")
         try encoder.encode(patronymic, for: "patronymic")
         try encoder.encode(social, for: "social")
-        try encoder.encode(date, for: "date", using: User.dateFormatter)
+        try encoder.encode(birthdate, for: "date", using: User.dateFormatter)
+        try encoder.encode(registrationDate, for: "registrationDate", transformedBy: UnixTransformer())
     }
 }
 ```
